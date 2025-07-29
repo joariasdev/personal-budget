@@ -44,5 +44,14 @@ app.put('/envelopes/:id', (req, res, next) => {
     res.send(envelope);
 });
 
+app.delete('/envelopes/:id', (req, res, next) => {
+    const envelopeIndex = envelopes.findIndex(e => e.id === req.params.id);
+    if (envelopeIndex === -1) {
+        res.status(404).send('Not Found');
+    }
+    envelopes.splice(envelopeIndex, 1);
+    res.status(204).send('Deleted');
+});
+
 // Sever Init
 app.listen(PORT, () => console.log(`Server is listening on port: ${PORT}`));
