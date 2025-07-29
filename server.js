@@ -8,7 +8,7 @@ const { nanoid } = require('nanoid');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const envelopes = [];
-const totalBudget = 0;
+const totalbalance = 0;
 
 // Middleware
 app.use(bodyParser.json());
@@ -27,8 +27,8 @@ app.get('/envelopes/:id', (req, res, next) => {
 })
 
 app.post('/envelopes', (req, res, next) => {
-    const { name, budget } = req.body;
-    const newEnvelope = { name, budget };
+    const { name, balance } = req.body;
+    const newEnvelope = { name, balance };
     newEnvelope.id = nanoid();
     envelopes.push(newEnvelope);
     res.status(201).send(newEnvelope);
@@ -40,7 +40,7 @@ app.put('/envelopes/:id', (req, res, next) => {
         res.status(404).send('Not Found');
     }
     envelope.name = req.body.name;
-    envelope.budget = req.body.budget;
+    envelope.balance = req.body.balance;
     res.send(envelope);
 });
 
