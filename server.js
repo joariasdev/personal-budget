@@ -18,6 +18,14 @@ app.get('/envelopes', (req, res, next) => {
     res.send(envelopes);
 })
 
+app.get('/envelopes/:id', (req, res, next) => {
+    const envelope = envelopes.find(e => e.id === req.params.id);
+    if (!envelope) {
+        res.status(404).send('Not Found');
+    }
+    res.send(envelope);
+})
+
 app.post('/envelopes', (req, res, next) => {
     const { name, budget } = req.body;
     const newEnvelope = { name, budget };
