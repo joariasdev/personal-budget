@@ -53,5 +53,20 @@ app.delete('/envelopes/:id', (req, res, next) => {
     res.status(204).send('Deleted');
 });
 
+app.post('/envelopes/transfer/:from/:to', (req, res, next) => {
+    const { amount } = req.body;
+    const originEnvelope = envelopes.find(e => e.id === req.params.from);
+    const targetEnvelope = envelopes.find(e => e.id === req.params.to);
+
+    if (!originEnvelope || !targetEnvelope) {
+        res.status(404).send('Not Found');
+    };
+
+    originEnvelope.balance -= amount;
+    targetEnvelope.balance += amount;
+
+    res.send("Transfer complete.")
+});
+
 // Sever Init
 app.listen(PORT, () => console.log(`Server is listening on port: ${PORT}`));
