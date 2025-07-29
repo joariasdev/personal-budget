@@ -34,5 +34,15 @@ app.post('/envelopes', (req, res, next) => {
     res.status(201).send(newEnvelope);
 });
 
+app.put('/envelopes/:id', (req, res, next) => {
+    const envelope = envelopes.find(e => e.id === req.params.id);
+    if (!envelope) {
+        res.status(404).send('Not Found');
+    }
+    envelope.name = req.body.name;
+    envelope.budget = req.body.budget;
+    res.send(envelope);
+});
+
 // Sever Init
 app.listen(PORT, () => console.log(`Server is listening on port: ${PORT}`));
