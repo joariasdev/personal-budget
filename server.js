@@ -14,8 +14,8 @@ const totalBudget = 0;
 app.use(bodyParser.json());
 
 // Routes
-app.get('/', (req, res, next) => {
-    res.send("Hello, world.")
+app.get('/envelopes', (req, res, next) => {
+    res.send(envelopes);
 })
 
 app.post('/envelopes', (req, res, next) => {
